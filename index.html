@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+<title>Juegos de vocabulario — ¡Conoce a Colombia!</title>
+<meta name="description" content="Spanish 1 and Spanish 2 vocabulary games for the Colombia unit: 26 browser games, no sign-in."/>
+<style>
+@import url('https://fonts.googleapis.com/css2?family=Nunito:wght@400;600;700;800&family=Fredoka+One&display=swap');
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+body{font-family:'Nunito',sans-serif;background:linear-gradient(135deg,#FCD116 0%,#003893 50%,#CE1126 100%);min-height:100vh;display:flex;flex-direction:column;align-items:center;padding:28px 16px;color:#1f2937}
+header{text-align:center;margin-bottom:24px;max-width:720px}
+h1{font-family:'Fredoka One',cursive;color:#fff;font-size:clamp(1.8rem,5vw,2.6rem);text-shadow:2px 2px 6px rgba(0,0,0,.4);margin-bottom:6px}
+.subtitle{color:#fff;font-size:1.05rem;font-weight:600;text-shadow:1px 1px 3px rgba(0,0,0,.35)}
+main{width:100%;max-width:820px;display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:18px}
+.level{display:flex;flex-direction:column;gap:10px;background:#fff;border-radius:20px;padding:22px;text-decoration:none;color:inherit;box-shadow:0 10px 26px rgba(0,0,0,.22);transition:transform .2s,box-shadow .2s;border-top:8px solid var(--accent)}
+.level:hover{transform:translateY(-3px);box-shadow:0 14px 32px rgba(0,0,0,.28)}
+.level:focus-visible{outline:4px solid #fff;outline-offset:4px}
+.level h2{font-family:'Fredoka One',cursive;font-size:1.6rem;color:var(--accent)}
+.level .count{font-weight:800;color:#374151}
+.level ul{list-style:none;display:flex;flex-wrap:wrap;gap:6px}
+.level li{font-size:.8rem;font-weight:700;background:#f3f4f6;border-radius:999px;padding:4px 10px;color:#374151}
+.level .go{margin-top:auto;align-self:flex-start;background:var(--accent);color:#fff;font-weight:800;padding:10px 18px;border-radius:999px}
+.sp1{--accent:#003893}
+.sp2{--accent:#CE1126}
+.games{width:100%;max-width:820px;margin-top:22px;background:rgba(255,255,255,.94);border-radius:20px;padding:20px 22px;box-shadow:0 10px 26px rgba(0,0,0,.18)}
+.games h2{font-family:'Fredoka One',cursive;font-size:1.25rem;color:#003893;margin-bottom:10px}
+.games dl{display:grid;grid-template-columns:auto 1fr;gap:6px 14px;font-size:.92rem}
+.games dt{font-weight:800;color:#6b7280;letter-spacing:.04em;font-size:.78rem;padding-top:2px}
+footer{margin-top:22px;max-width:720px;text-align:center;color:#fff;font-size:.85rem;font-weight:600;text-shadow:1px 1px 3px rgba(0,0,0,.4);line-height:1.5}
+</style>
+</head>
+<body>
+<header>
+  <h1>¡Conoce a Colombia!</h1>
+  <p class="subtitle">Juegos de vocabulario · Vocabulary games</p>
+</header>
+
+<main>
+  <a class="level sp1" href="span_1/unidad_colombia/Colombia_Vocab_Review_Spanish1.html">
+    <h2>Español 1</h2>
+    <p class="count" data-count="SP1">Colombia unit vocabulary</p>
+    <ul data-themes="SP1"></ul>
+    <span class="go">Jugar →</span>
+  </a>
+  <a class="level sp2" href="span_2/unidad_colombia/Colombia_Vocab_Review_Spanish2.html">
+    <h2>Español 2</h2>
+    <p class="count" data-count="SP2">Colombia unit vocabulary</p>
+    <ul data-themes="SP2"></ul>
+    <span class="go">Jugar →</span>
+  </a>
+</main>
+
+<section class="games" aria-labelledby="games-h">
+  <h2 id="games-h">26 juegos en cada nivel</h2>
+  <dl>
+    <dt>VOCAB</dt><dd>Flashcards, Quiz, Match, Scramble, Hangman, Whack-a-Word, Memory, Word Search, Crossword, Chain</dd>
+    <dt>LISTEN</dt><dd>Listen, Echo (record yourself), Odd One Out</dd>
+    <dt>READ</dt><dd>Fill in the Blank, True/False</dd>
+    <dt>GRAMMAR</dt><dd>Conjugation Blitz, Sort It, Build a Sentence, Gender</dd>
+    <dt>WRITE</dt><dd>Translation, Prompt Response, Mad Libs</dd>
+    <dt>ARCADE</dt><dd>Falling Words, Quiz Race, Boss Battle</dd>
+    <dt>CULTURE</dt><dd>Dialogue</dd>
+  </dl>
+</section>
+
+<footer>
+  No sign-in needed. Progress stays in this browser only.<br/>
+  Works on Chromebooks, tablets, and phones.
+</footer>
+
+<script src="unidad_colombia/student_site_assets/data/colombia-vocab-sp1.js"></script>
+<script src="unidad_colombia/student_site_assets/data/colombia-vocab-sp2.js"></script>
+<script>
+// Fill word counts and theme chips from the same data files the games use.
+['SP1', 'SP2'].forEach(function (key) {
+  var data = window['__METZ_COLOMBIA_VOCAB_DATA_' + key];
+  if (!data || !data.categories || !data.categories.length) return;
+  var count = document.querySelector('[data-count="' + key + '"]');
+  if (count) count.textContent = data.categories[0].words.length + ' words · ' + data.themes.length + ' themes';
+  var list = document.querySelector('[data-themes="' + key + '"]');
+  if (list) data.themes.forEach(function (t) {
+    var li = document.createElement('li');
+    li.textContent = t.name;
+    list.appendChild(li);
+  });
+});
+</script>
+</body>
+</html>
